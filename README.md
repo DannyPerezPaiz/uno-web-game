@@ -26,7 +26,3 @@ As part of a team project, I contributed primarily to frontend development, inte
 ## Team Project
 
 Built collaboratively with a student team as part of a software development course.
-
-## What I Learned
-
-This project helped me gain experience working on team-based full-stack applications, coordinating features across frontend and backend systems, and designing user-friendly interfaces.
