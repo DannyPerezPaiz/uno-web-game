@@ -1,0 +1,144 @@
+// imports
+import express from "express";
+import session from "express-session";
+import path from "path";
+import { pool } from "../databases/db";
+import bcrypt from "bcrypt";
+
+import { games } from "./game";
+
+// routing to index
+const router = express.Router();
+
+router.get("/", (_req, res) => {
+  res.sendFile(path.join(__dirname, "../../frontend/index.html"));
+});
+router.post("/", (_req, res) => {
+  res.send("you posted");
+});
+router.get("/lobby", (req, res)=> {
+  if(!req.session.user){
+    return res.redirect("/login.html");
+  }
+  return res.render("lobby", {username: req.session.user.username});
+});
+
+
+// ---------- API ENDPOINTS ----------
+
+// handle signups for new users
+router.post("/auth/signup", async (req, res, next) => {
+    try{
+        // get data
+        const username = req.body.username;
+        const email = req.body.email;
+        const password = req.body.password;
+
+        // ensure data is present
+        if(!username || !email || !password){
+            return res.status(400).send("Missing required fields");
+        }
+
+        // hash password (for security reasons)
+        const password_hash = await bcrypt.hash(password, 10);
+
+        // create user
+        let query = `
+        INSERT INTO users (username, email, password_hash) 
+        VALUES ($1, $2, $3)
+        `
+
+        let result =  await pool.query(query, [username, email, password_hash])
+        console.log("New user:", result.rows[0]);
+
+        return res.status(201).json({ ok: true, redirectTo: "/login.html" });
+    } catch (err: any) {
+
+        // specific error code for accounts that exist already
+        if(err.code === "23505"){
+          return res.status(409).json({ error: "Email already in use!" });
+        }
+
+        // generic error
+        next(err)
+    }
+});
+
+// handle logins for existing users
+router.post("/auth/login", async (req, res, next) => {
+    try{
+        // get data
+        const username = req.body.username; //or email!
+        const password = req.body.password;
+
+        // ensure data is present
+        if(!username || !password){
+            return res.status(400).json({ error: "Missing required fields" });
+        }
+
+        // get and compare passwords for validation
+        const query = `
+          SELECT id, username, email, password_hash
+          FROM users
+          WHERE username = $1 OR email = $1
+          LIMIT 1
+        `;
+        const result = await pool.query(query, [username]);
+        // no user found
+        if (result.rows.length === 0) {
+          return res.status(400).send("user not found");
+        }
+        const user = result.rows[0];
+        
+        if(await bcrypt.compare(password, user.password_hash)){
+          req.session.user = {
+            id: user.id,
+            username: user.username,
+            email:user.email
+          };
+          return res.status(200).json({ ok: true, redirectTo: "/lobby" });
+        }
+        
+        console.log(bcrypt.hash(password, 10))
+        console.log(user.password_hash)
+        return res.status(400).json({ error: "Invalid Credentials" });
+
+    } catch (err: any) {
+        // generic error
+        next(err)
+    }
+});
+
+router.post("/auth/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) return res.status(500).send("Logout failed");
+    res.redirect("/");
+  });
+});
+
+router.post("/messages/send", (req, res) => {
+  if (!req.session.user || !req.session.game) {
+    return res.redirect("/login.html");
+  }
+
+  const roomCode = String(req.session.game.roomCode || "").trim().toUpperCase();
+  if (!roomCode) return res.redirect("/lobby");
+
+  const game = games.get(roomCode);
+  if (!game) return res.redirect("/lobby");
+
+  const text = String(req.body.message || "").trim();
+  if (!text) return res.redirect(`/game.html?roomCode=${roomCode}`);
+  if (text.length > 200) return res.redirect(`/game.html?roomCode=${roomCode}`);
+
+  game.chat.push({
+    nickname: req.session.game.nickname,
+    text,
+    ts: Date.now(),
+  });
+
+  // game.html lives at /game.html, not /game/:code
+  return res.redirect(`/game.html?roomCode=${roomCode}`);
+});
+
+export default router;

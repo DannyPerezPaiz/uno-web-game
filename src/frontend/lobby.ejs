@@ -1,0 +1,56 @@
+<!--SIgn In Landing (Global Lobby)-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lobby – UNO</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/lobby.css" />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/lobby.css" />
+</head>
+<body>
+    <header class="site-header">
+        <h1>UNO Lobby</h1>
+        <nav class="user-nav">
+            <span class="user-info">Logged in as: <strong><%= username %></strong></span>
+            <br>
+            <form action="/auth/logout" method="POST" class="logout-form">
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </nav>
+    </header>
+
+    <main>
+        <section id="create-game" class="form-card">
+            <h1>Create New Game Session</h1>
+            <form action="/api/games/create" method="POST">
+
+                <label>Nickname</label>
+                <input type="text" name="nickname" value="<%= username %>"/>
+
+                <label for="num">Number of Bot Players</label>
+                <input type="number" name="bots" min="0" max="3" value="0" required />
+
+                <button type="submit">Create Session</button>
+            </form>
+        </section>
+        <section id="join-game" class="form-card">
+            <h1>Join Game</h1>
+            <form action="/api/games/join" method="POST">
+                <label>Nickname</label>
+                <input type="text" name="nickname" value="<%= username %>" required />
+
+                <label>Room Code (Provided by Game Host)</label>
+                <input type="text" name="roomCode" required />
+
+                <button type="submit">Join Session</button> <!-- /api/games/join -->
+            </form>
+            <!-- once a game is joined, delete this section, add in a "waiting for host..." prompt -->
+            <!-- once a game is joined, delete create-game -->
+        </section>               
+    </main>
+</body>
+</html>

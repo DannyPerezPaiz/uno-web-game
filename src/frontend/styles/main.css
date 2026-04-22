@@ -1,0 +1,678 @@
+/* =========================================
+   Main CSS for UNO Project - Vanilla CSS
+   ========================================= */
+
+/* -------------------------------
+   CSS Variables
+-------------------------------- */
+:root {
+    --primary: #e63946;
+    --primary-dark: #d62828;
+    --bg: #ffffff;
+    --bg2: #f9f9f9;
+    --shadow: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 8px;
+}
+
+/* -------------------------------
+   Body & Global Styles
+-------------------------------- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg2);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* -------------------------------
+   Site Header
+-------------------------------- */
+.site-header {
+    background: var(--primary);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+}
+
+.site-header a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.site-header a:hover {
+    text-decoration: underline;
+}
+
+/* -------------------------------
+   Form Container & Cards
+-------------------------------- */
+.form-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.form-card {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-width: 400px;
+    width: 100%;
+}
+
+.form-card h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.form-card p {
+    text-align: center;
+}
+
+/* -------------------------------
+   Forms & Inputs
+-------------------------------- */
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+form input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: var(--radius);
+    border: 1px solid #ccc;
+}
+
+form input:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(230,57,70,0.3);
+}
+
+/* Buttons */
+form button {
+    width: 100%; /* Full width for forms only */
+    padding: 0.75rem;
+    background: var(--primary);
+    border: none;
+    color: white;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+
+form button:hover {
+    background: var(--primary-dark);
+}
+
+button:not(form button) {
+    width: auto;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+}
+
+/* -------------------------------
+   Error Messages
+-------------------------------- */
+.error-message {
+    background: #ffd6d6;
+    padding: 0.75rem;
+    border-left: 4px solid #e63946;
+    margin-bottom: 1rem;
+    border-radius: var(--radius);
+}
+
+/* -------------------------------
+   Lobby Styles
+-------------------------------- */
+.lobby-card {
+    max-width: 700px;
+}
+
+.game-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 1rem;
+}
+
+.game-list-item,
+.game-list li {
+    background: var(--bg);
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: var(--radius);
+    display: flex;
+    justify-content: space-between;
+    box-shadow: var(--shadow);
+}
+
+.game-list li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.game-list li a:hover {
+    color: var(--primary);
+}
+
+.lobby-chat {
+    height: 100%;
+}
+
+/* -------------------------------
+   Chat Styles (shared)
+-------------------------------- */
+.chat-box,
+.chat-card {
+    margin-top: 1rem;
+    background: var(--bg);
+    padding: 1rem;
+    border-radius: var(--radius);
+    max-height: 300px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-message {
+    margin-bottom: 0.5rem;
+}
+
+/* scrollable message area used in lobby & game */
+.chat-messages {
+    background: #f7f7f7;
+    border-radius: 8px;
+    padding: 0.75rem;
+    overflow-y: auto;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.chat-input {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.chat-input input {
+    flex: 1;
+}
+
+/* -------------------------------
+   Game Page Mockup (basic)
+-------------------------------- */
+.game-area {
+    margin-top: 1rem;
+    background: var(--bg);
+    padding: 2rem;
+    border-radius: var(--radius);
+    min-height: 300px;
+    box-shadow: var(--shadow);
+}
+
+.placeholder-card {
+    width: 80px;
+    height: 120px;
+    background: #ddd;
+    border-radius: var(--radius);
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+/* -------------------------------
+   Lobby Layout (Columns)
+-------------------------------- */
+.lobby-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem;
+    justify-content: center;
+}
+
+.lobby-left,
+.lobby-right {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Lobby Cards */
+.card {
+    background: var(--bg);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.card h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+/* -------------------------------
+   Responsive Adjustments
+-------------------------------- */
+@media (max-width: 800px) {
+    .lobby-layout {
+        flex-direction: column;
+        padding: 1rem;
+    }
+}
+
+/* -------------------------------
+   Uno Card Styles
+-------------------------------- */
+.uno-card {
+    width: 90px;
+    height: 140px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    margin: 0.25rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    background-clip: padding-box;
+    border: 2px solid #333;
+}
+
+.uno-card.red    { background-color: #d93f3f; }
+.uno-card.green  { background-color: #3cb371; }
+.uno-card.blue   { background-color: #1e90ff; }
+.uno-card.yellow { background-color: #ffd700; color: black; }
+
+/* Wild cards */
+.uno-card.wild {
+    background: linear-gradient(45deg, red, yellow, green, blue);
+    color: black;
+}
+
+/* Corner numbers/symbols */
+.card-top-left,
+.card-bottom-right {
+    font-size: 0.9rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-top-left {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+}
+
+/* Flip the bottom-right corner */
+.card-bottom-right {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    transform: rotate(180deg);
+}
+
+/* Center Oval */
+.card-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 90px;
+    background-color: rgba(255,255,255,0.2);
+    border: 3px solid white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Wrap the icon inside a rotated oval container */
+.card-center .icon {
+    transform: none;
+}
+
+/* -------------------------------
+   Game Layout Specific Styles
+   (non-grid helpers: center piles, etc.)
+-------------------------------- */
+
+.board-center {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.draw-pile,
+.discard-pile {
+    width: 80px;
+    height: 120px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #333;
+    background: #f1f1f1;
+}
+
+.hand-cards {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* =========================================================
+   GAME PAGE LAYOUT -- Danny update
+   ========================================================= */
+
+.game-layout {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+        "info   info"
+        "board  chat"
+        "hand   chat";
+    gap: 1.5rem;
+    align-items: flex-start;
+    margin: 1.5rem auto;
+    max-width: 1200px;
+}
+
+.game-info {
+    grid-area: info;
+}
+
+.game-board {
+    grid-area: board;
+}
+
+.player-hand {
+    grid-area: hand;
+}
+
+/* ---- GAME CHAT: tall right column, large messages, stacked input+button ---- */
+
+.game-chat {
+    grid-area: chat;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background: var(--bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    min-height: 720px;  /* tall chat column like before */
+}
+
+.game-chat h2 {
+    margin: 0 0 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* big scrollable message area inside game chat */
+.game-chat .chat-messages {
+    flex: 1;
+    min-height: 0;
+    background: #f7f7f7;
+    border-radius: 8px;
+    padding: 12px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+/* Make chat input and send button full-width stacked */
+.game-chat .chat-input {
+    display: flex;
+    flex-direction: column;   /* input ABOVE button */
+    gap: 0.1rem;
+    width: 100%;
+}
+
+.game-chat .chat-input input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+}
+
+.game-chat .chat-input button {
+    width: 100%;
+    padding: 11px;
+    border-radius: 6px;
+    border: none;
+    background: var(--primary);
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.game-chat .chat-input button:hover {
+    background: var(--primary-dark);
+}
+
+/* -------------------------------
+   Inner table layout: players around center
+-------------------------------- */
+
+.game-table-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        ".     top    ."
+        "left  center right"
+        ".     .      .";
+    min-height: 260px;
+    align-items: center;
+    justify-items: center;
+}
+
+/* slightly bigger player boxes, less empty space */
+.player-slot {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 0.9rem 1.4rem;      /* bigger than before */
+    min-width: 120px;            /* makes the card wider */
+    text-align: center;
+    font-size: 0.95rem;          /* slightly larger text */
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+}
+
+.player-top   { grid-area: top; }
+.player-left  { grid-area: left; }
+.player-right { grid-area: right; }
+
+.player-name {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.player-meta {
+    color: #6b7280;
+    font-size: 0.78rem;
+}
+
+/* Center piles -------------------------------------------------------- */
+
+.table-center {
+    grid-area: center;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.pile-label {
+    text-align: center;
+    font-size: 0.8rem;
+    margin-bottom: 1.15rem;
+    color: #4b5563;
+}
+
+.pile-cards {
+    width: 80px;
+    height: 100px;
+    margin-top: 30px;
+    border-radius: 50%;
+    background: #d93f3f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Player hand row ----------------------------------------------------- */
+
+.player-hand .hand-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Responsive layout --------------------------------------------------- */
+
+@media (max-width: 900px) {
+    .game-layout {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "info"
+            "board"
+            "hand"
+            "chat";
+    }
+}
+
+/* CHAT STYLES */
+
+.chat-box {
+  flex: 1;  
+  min-height: 520px;
+  overflow-y: auto;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 10px;
+  background: #fafafa;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.chat-msg {
+  margin: 6px 0;
+}
+
+.chat-name {
+  font-weight: 700;
+}
+
+.chat-time {
+  color: #777;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+.chat-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.chat-input {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+}
+
+.chat-send {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* select color when wild card */
+.wild-picker.hidden { display: none; }
+
+.wild-picker {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.5);
+  z-index: 9999;
+}
+
+.wild-picker-card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  min-width: 260px;
+}
+
+.wild-picker-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.wild-btn {
+  padding: 10px 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.yellow { background-color: #ffd700; }
+
+.green{ background-color: #3cb371; }
+
+.blue{ background-color: #1e90ff; }
+
+.red{ background-color: #d93f3f; }
+
+.wild-btn {
+    border: rgba(0,0,0,0) 3px solid; /*make sure width stays the same!!*/
+    opacity: 50%;
+}
+
+.wild-btn:hover {
+    opacity: 100%;
+}

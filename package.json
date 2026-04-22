@@ -1,0 +1,55 @@
+{
+  "name": "term-project-team-b-cuatro",
+  "version": "1.0.0",
+  "description": "- Jasmine Hernandez\r - Sarah Sahajlan\r - Daniel Perez Paiz\r - Katy O'Brien",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --watch src --ext ts --exec ts-node --files src/backend/server.ts",
+    "build": "tsc && cpx \"src/frontend/**/*\" dist/frontend",
+    "start": "node dist/backend/server.js",
+    "migrate:up": "node-pg-migrate up -m src/backend/databases/migrations --database-url-var DATABASE_URL",
+    "migrate:down": "node-pg-migrate down -m src/backend/databases/migrations --database-url-var DATABASE_URL",
+    "migrate": "node-pg-migrate -m src/backend/databases/migrations -d \"postgres://postgres:2424@localhost:5432/uno_game\" up"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csc-667-fall-2025-roberts/term-project-team-b-cuatro.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/csc-667-fall-2025-roberts/term-project-team-b-cuatro/issues"
+  },
+  "homepage": "https://github.com/csc-667-fall-2025-roberts/term-project-team-b-cuatro#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "express-session": "^1.18.2",
+    "http-errors": "^2.0.1",
+    "morgan": "^1.10.1"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/express": "^5.0.5",
+    "@types/express-session": "^1.18.2",
+    "@types/http-errors": "^2.0.5",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^24.10.1",
+    "@types/pg": "^8.15.6",
+    "node-pg-migrate": "^7.6.1",
+    "nodemon": "^3.1.11",
+    "pg": "^8.16.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+  
+
+
+
+
+}

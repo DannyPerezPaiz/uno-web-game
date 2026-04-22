@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Over – UNO</title>
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/endGame.css" />
+</head>
+<body>
+
+  <link rel="stylesheet" href="/styles/endGame.css" />
+
+<div class="endgame-page">
+  <div class="endgame-card">
+    <div class="endgame-header">There Can Only Be UNO Winner</div>
+
+    <div class="endgame-content">
+      <h1 class="endgame-title">CONGRATS</h1>
+
+      <div class="winner-panel">
+        <div class="winner-name"><%= winnerNickname || winnerUsername %></div>
+      </div>
+
+      <div class="endgame-actions">
+        <a class="endgame-btn btn-logout" href="/logout">LOG OUT</a>
+        <a class="endgame-btn btn-lobby" href="/lobby">GO TO LOBBY</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
